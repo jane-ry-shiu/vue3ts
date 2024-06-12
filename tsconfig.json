@@ -12,6 +12,13 @@
     }
   ],
   "compilerOptions": {
-    "module": "NodeNext"
-  }
+    "module": "NodeNext",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@pages/*": ["src/pages/*"]
+    }
+  },
+  "include": ["src/**/*"]
 }
