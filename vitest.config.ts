@@ -15,7 +15,8 @@ export default mergeConfig(
         deps: {
           inline: ['vuetify']
         }
-      }
+      },
+      setupFiles: ['./src/plugin/test-setup.ts']
     }
   })
 )
