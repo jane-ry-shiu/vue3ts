@@ -61,8 +61,6 @@ const buttonAttrs = computed(() => ({
   ...props,
 }));
 
-console.log('buttonAttrs', buttonAttrs, attrs);
-
 const label = ref('Button');
 const count = ref(100);
 

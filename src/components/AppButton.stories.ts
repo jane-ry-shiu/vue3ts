@@ -34,7 +34,6 @@ export const Primary: Story = {
       await userEvent.click(canvas.getByRole('button'))
     })
 
-    console.log('args.onClick', args.onClick)
     await waitFor(() => expect(args.onClick).toHaveBeenCalled())
   }
 }
