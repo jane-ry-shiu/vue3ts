@@ -1,7 +1,11 @@
 # .github/workflows/ui-tests.yml
  
 name: 'Storybook Tests'
-on: push
+run-name: 'Storybook Tests'
+on: 
+  push:
+    paths:
+      - 'src/**/*.stories.*'
 jobs:
  test:
    timeout-minutes: 60
