@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { fn } from '@storybook/test'
+import { expect, fn, userEvent, waitFor, within } from '@storybook/test'
 import Component from './AppButton.vue'
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
@@ -26,6 +26,16 @@ type Story = StoryObj<typeof meta>
 export const Primary: Story = {
   args: {
     color: 'primary'
+  },
+  play: async ({ canvasElement, step, args }) => {
+    const canvas = within(canvasElement)
+
+    await step('Button can be clicked ', async () => {
+      await userEvent.click(canvas.getByRole('button'))
+    })
+
+    console.log('args.onClick', args.onClick)
+    await waitFor(() => expect(args.onClick).toHaveBeenCalled())
   }
 }
 

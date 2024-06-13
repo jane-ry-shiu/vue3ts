@@ -1,5 +1,8 @@
 <template>
-  <v-btn v-bind="buttonAttrs">
+  <v-btn
+    v-bind="buttonAttrs"
+    @click="$emit('click', $event)"
+  >
     <slot :num="123"></slot>
     <slot
       name="named"
@@ -24,8 +27,6 @@ interface AppButtonProps {
   /** size of button */
   size?: 'small' | 'default' | 'large';
 }
-
-
 
 interface AppButtonEvents {
   /** Fired when item is deleted */
@@ -53,13 +54,14 @@ const props = withDefaults(defineProps<AppButtonProps>(), {
 
 const emit = defineEmits<AppButtonEvents>();
 
-
 const attrs = useAttrs();
 
 const buttonAttrs = computed(() => ({
   ...attrs,
   ...props,
 }));
+
+console.log('buttonAttrs', buttonAttrs, attrs);
 
 const label = ref('Button');
 const count = ref(100);

@@ -24,7 +24,8 @@ export const createMyApp = () => {
   return app
 }
 
-if (typeof process !== 'undefined') {
-  const app = createMyApp()
-  app.mount('#app')
-}
+// TODO: Add conditional rendering for storybook
+// if (typeof process !== 'undefined') {
+const app = createMyApp()
+app.mount('#app')
+// }
