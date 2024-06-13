@@ -16,7 +16,8 @@
     "format": "prettier --write src/",
     "storybook": "storybook dev -p 6006",
     "test-storybook": "test-storybook --watch",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_56cf1b854ab074c"
   },
   "dependencies": {
     "pinia": "^2.1.7",
@@ -46,6 +47,7 @@
     "@vue/eslint-config-typescript": "^13.0.0",
     "@vue/test-utils": "^2.4.5",
     "@vue/tsconfig": "^0.5.1",
+    "chromatic": "^11.5.4",
     "cypress": "^13.7.2",
     "eslint": "^8.57.0",
     "eslint-plugin-cypress": "^2.15.1",
