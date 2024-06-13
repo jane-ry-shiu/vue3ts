@@ -10,15 +10,21 @@ import { createPinia } from 'pinia'
 import { createVuetify } from 'vuetify'
 import router from './router'
 
-const app = createApp(App)
-
 export const vuetify = createVuetify({
   components,
   directives
 })
+export const createMyApp = () => {
+  const app = createApp(App)
 
-app.use(vuetify)
-app.use(createPinia())
-app.use(router)
+  app.use(vuetify)
+  app.use(createPinia())
+  app.use(router)
 
-app.mount('#app')
+  return app
+}
+
+if (typeof process !== 'undefined') {
+  const app = createMyApp()
+  app.mount('#app')
+}

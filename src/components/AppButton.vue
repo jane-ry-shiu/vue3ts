@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import { VBtn } from 'vuetify/components';
 
-import { ref, useAttrs, withDefaults } from 'vue';
+import { computed, ref, useAttrs, withDefaults } from 'vue';
 
 interface AppButtonProps {
   /** color of button */
@@ -25,12 +25,7 @@ interface AppButtonProps {
   size?: 'small' | 'default' | 'large';
 }
 
-const props = withDefaults(defineProps<AppButtonProps>(), {
-  color: 'primary',
-  size: 'default'
-});
 
-const attrs = useAttrs();
 
 interface AppButtonEvents {
   /** Fired when item is deleted */
@@ -39,7 +34,6 @@ interface AppButtonEvents {
   (name: 'click', e: MouseEvent): void;
 }
 
-const emit = defineEmits<AppButtonEvents>();
 
 defineSlots<{
   /** Example description for default */
@@ -52,6 +46,21 @@ defineSlots<{
   vbind(props: { num: number; str: string; }): any;
 }>();
 
+const props = withDefaults(defineProps<AppButtonProps>(), {
+  color: 'primary',
+  size: 'default'
+});
+
+const emit = defineEmits<AppButtonEvents>();
+
+
+const attrs = useAttrs();
+
+const buttonAttrs = computed(() => ({
+  ...attrs,
+  ...props,
+}));
+
 const label = ref('Button');
 const count = ref(100);
 
@@ -62,10 +71,7 @@ defineExpose({
   count,
 });
 
-const buttonAttrs = {
-  ...attrs,
-  ...props
-};
+
 
 </script>
 
