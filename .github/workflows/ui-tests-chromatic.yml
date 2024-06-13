@@ -2,7 +2,16 @@
 # deploy to chromatic
  
 name: 'Chromatic'
-on: push
+run-name: Publish to Chromatic
+
+on: 
+  push:
+    paths:
+      - 'src/**/*.vue'
+      - 'src/**/*.less'
+      - 'src/**/*.css'
+      - 'src/**/*.scss'
+      - 'src/**/*.sass'
 jobs:
  chromatic-deployment:
    runs-on: ubuntu-latest
