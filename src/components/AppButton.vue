@@ -1,5 +1,5 @@
 <template>
-  <v-btn v-bind="buttonAttrs">
+  <v-btn v-bind="buttonAttrs" v-on="emit">
     <slot :num="123"></slot>
     <slot
       name="named"
@@ -10,14 +10,13 @@
       name="vbind"
       v-bind="{ num: 123, str: 'str' }"
     ></slot>
-
   </v-btn>
 </template>
 
 <script setup lang="ts">
 import { VBtn } from 'vuetify/components';
 
-import { useAttrs, withDefaults, defineProps, defineEmits } from 'vue';
+import { useAttrs, withDefaults } from 'vue';
 
 interface AppButtonProps {
   /** color of button */
@@ -36,8 +35,8 @@ const attrs = useAttrs();
 interface AppButtonEvents {
   /** Fired when item is deleted */
   (event: 'delete', id: string): void;
-  /** Fired when item is clicked */
-  (name: 'click', e: MouseEvent): void;
+  /** Fired when item is added */
+  (name: 'add', e: MouseEvent): void;
 }
 
 const emit = defineEmits<AppButtonEvents>();
