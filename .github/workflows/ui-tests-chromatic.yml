@@ -1,28 +1,62 @@
-# .github/workflows/ui-tests.yml
-# deploy to chromatic
+# # .github/workflows/ui-tests.yml
+# # deploy to chromatic
  
-name: 'Chromatic'
-run-name: Publish to Chromatic
+# name: 'Chromatic'
+# run-name: Publish to Chromatic
 
-on: 
+# on: 
+#   push:
+#     paths:
+#       - 'src/**/*.vue'
+#       - 'src/**/*.less'
+#       - 'src/**/*.css'
+#       - 'src/**/*.scss'
+#       - 'src/**/*.sass'
+# jobs:
+#  chromatic-deployment:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#        with:
+#          fetch-depth: 0 # Required to retrieve git history
+#      - name: Install dependencies
+#        run: yarn
+#      - name: Publish to Chromatic
+#        uses: chromaui/action@v1
+#        with:
+#          # Grab this from the Chromatic manage page
+#          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+
+name: 'Chromatic'
+on:
   push:
-    paths:
-      - 'src/**/*.vue'
-      - 'src/**/*.less'
-      - 'src/**/*.css'
-      - 'src/**/*.scss'
-      - 'src/**/*.sass'
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
 jobs:
- chromatic-deployment:
-   runs-on: ubuntu-latest
-   steps:
-     - uses: actions/checkout@v2
-       with:
-         fetch-depth: 0 # Required to retrieve git history
-     - name: Install dependencies
-       run: yarn
-     - name: Publish to Chromatic
-       uses: chromaui/action@v1
-       with:
-         # Grab this from the Chromatic manage page
-         projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+  chromatic-deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Required to retrieve git history
+      - name: Install dependencies
+        run: npm install
+      - name: Publish to Chromatic
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+
+  wait-for-chromatic-approval:
+    runs-on: ubuntu-latest
+    needs: chromatic-deployment
+    steps:
+      - name: Wait for Chromatic to approve the PR
+        run: |
+          echo "Waiting for Chromatic approval..."
+          # Custom logic to wait for Chromatic approval can be added here
+          # This is a placeholder, you need to integrate with Chromatic API
+
