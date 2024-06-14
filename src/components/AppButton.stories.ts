@@ -27,6 +27,12 @@ export const Primary: Story = {
   args: {
     color: 'primary'
   },
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/Y6zpsT3gKsYVu3wRlWSFym/Plugins-for-Dev-Mode-Playground-(Copy)?m=dev&node-id=327-187&t=1C8bZTxq2vTrfnpP-1'
+    }
+  },
   play: async ({ canvasElement, step, args }) => {
     const canvas = within(canvasElement)
 
