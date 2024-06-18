@@ -1,17 +1,15 @@
-import { VueWrapper, mount } from '@vue/test-utils'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import AppButton from './AppButton.vue'
-import { vuetify } from '@/main'
+import { mount } from '@vue/test-utils'
 
 describe('AppButton', () => {
-  let wrapper: VueWrapper<any>
+  let wrapper
 
   beforeEach(() => {
     wrapper = mount(AppButton, {
-      props: {},
-      global: {
-        plugins: [vuetify]
+      props: {
+        color: 123
       }
     })
 
@@ -23,14 +21,16 @@ describe('AppButton', () => {
     expect(wrapper.props().size).toBe('default')
   })
 
+  it.only('set props color to 123', () => {
+    wrapper.setProps({ color: 'secondary' })
+    expect(wrapper.props().color).toBe('secondary')
+  })
+
   it('button be clicked', async () => {
     const mockClickHandler = vi.fn()
     const wrapper = mount(AppButton, {
       props: {
         onClick: mockClickHandler
-      },
-      global: {
-        plugins: [vuetify]
       }
     })
 
@@ -42,9 +42,6 @@ describe('AppButton', () => {
 
   it('renders slots correctly', () => {
     const wrapper = mount(AppButton, {
-      global: {
-        plugins: [vuetify]
-      },
       slots: {
         default: '<div>default slot</div>',
         named: '<div>named slot</div>',

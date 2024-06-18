@@ -1,11 +1,11 @@
-import { VueWrapper, mount } from '@vue/test-utils'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import AppButton from './AppButton.vue'
+import AppButton from '@/components/AppButton.vue'
+import { mount } from '@vue/test-utils'
 import { vuetify } from '@/main'
 
 describe('AppButton', () => {
-  let wrapper: VueWrapper<any>
+  let wrapper
 
   beforeEach(() => {
     wrapper = mount(AppButton, {
