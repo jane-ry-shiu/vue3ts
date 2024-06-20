@@ -3,9 +3,10 @@
 name: 'Storybook Tests'
 run-name: 'Storybook Tests'
 on: 
-  push:
-    paths:
-      - 'src/**/*.stories.*'
+  pull_request:
+    branches:
+      - '**'
+
 jobs:
  test:
    timeout-minutes: 60
