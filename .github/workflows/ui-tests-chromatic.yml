@@ -24,9 +24,9 @@ jobs:
         uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-        env:
-          GH_PAT: ${{ secrets.GH_PAT }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # env:
+        #   GH_PAT: ${{ secrets.GH_PAT }}
 
   wait-for-chromatic-approval:
     runs-on: ubuntu-latest
