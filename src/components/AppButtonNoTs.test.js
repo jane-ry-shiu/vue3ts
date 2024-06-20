@@ -7,11 +7,7 @@ describe('AppButton', () => {
   let wrapper
 
   beforeEach(() => {
-    wrapper = mount(AppButton, {
-      props: {
-        color: 123
-      }
-    })
+    wrapper = mount(AppButton, {})
 
     vi.clearAllMocks()
   })
@@ -19,11 +15,6 @@ describe('AppButton', () => {
   it('renders correctly with default props', () => {
     expect(wrapper.props().color).toBe('primary')
     expect(wrapper.props().size).toBe('default')
-  })
-
-  it.only('set props color to 123', () => {
-    wrapper.setProps({ color: 'secondary' })
-    expect(wrapper.props().color).toBe('secondary')
   })
 
   it('button be clicked', async () => {
