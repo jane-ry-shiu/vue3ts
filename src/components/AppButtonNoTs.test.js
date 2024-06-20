@@ -1,19 +1,13 @@
-import { VueWrapper, mount } from '@vue/test-utils'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import AppButton from './AppButton.vue'
-import { vuetify } from '@/main'
+import { mount } from '@vue/test-utils'
 
 describe('AppButton', () => {
-  let wrapper: VueWrapper<any>
+  let wrapper
 
   beforeEach(() => {
-    wrapper = mount(AppButton, {
-      props: {},
-      global: {
-        plugins: [vuetify]
-      }
-    })
+    wrapper = mount(AppButton, {})
 
     vi.clearAllMocks()
   })
@@ -28,9 +22,6 @@ describe('AppButton', () => {
     const wrapper = mount(AppButton, {
       props: {
         onClick: mockClickHandler
-      },
-      global: {
-        plugins: [vuetify]
       }
     })
 
@@ -42,9 +33,6 @@ describe('AppButton', () => {
 
   it('renders slots correctly', () => {
     const wrapper = mount(AppButton, {
-      global: {
-        plugins: [vuetify]
-      },
       slots: {
         default: '<div>default slot</div>',
         named: '<div>named slot</div>',

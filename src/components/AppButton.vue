@@ -52,6 +52,8 @@ const props = withDefaults(defineProps<AppButtonProps>(), {
   size: 'default'
 });
 
+console.log('props', props.color);
+
 const emit = defineEmits<AppButtonEvents>();
 
 const attrs = useAttrs();
