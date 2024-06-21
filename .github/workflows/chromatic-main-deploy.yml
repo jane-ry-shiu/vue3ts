@@ -26,3 +26,9 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           autoAcceptChanges: true
+
+      # Set Chromatic snapshot as main branch baseline
+      - name: Set Chromatic snapshot as main branch baseline
+        run: |
+          chromatic baseline --project-token ${{ secrets.CHROMATIC_PROJECT_TOKEN }} --main-branch
+
