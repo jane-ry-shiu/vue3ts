@@ -30,7 +30,7 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          branchName: ${GITHUB_HEAD_REF}:${GITHUB_BASE_REF}
+          branchName: ${{ github.event.pull_request.head.repo.full_name }}:${{ github.event.pull_request.head.ref }}
 
   wait-for-chromatic-approval:
     runs-on: ubuntu-latest
