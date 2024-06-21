@@ -1,11 +1,8 @@
 # .github/workflows/ui-tests.yml
 # deploy to chromatic
  
-name: 'Chromatic'
+name: 'Chromatic PR Deployment'
 on:
-  push:
-    branches:
-      - '**'
   pull_request_target:
     branches:
       - main
@@ -24,24 +21,13 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Publish to Chromatic (for approval)
-        if: github.event_name == 'pull_request'
         uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Publish to Chromatic (main)
-        if: github.ref == 'refs/heads/main'
-        uses: chromaui/action@v1
-        with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          autoAcceptChanges: true
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
 
   wait-for-chromatic-approval:
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
     needs: chromatic-deployment
     steps:
       - name: Wait for Chromatic to approve the PR
