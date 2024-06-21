@@ -20,7 +20,7 @@ jobs:
           node-version: '20' # Specify the Node.js version you are using
       - name: Install dependencies
         run: npm install
-      - name: Publish to Chromatic (for approval)
+      - name: Publish to Chromatic and Update Baseline (main)
         uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
