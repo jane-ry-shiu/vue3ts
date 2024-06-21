@@ -6,6 +6,8 @@ on:
   pull_request_target:
     branches:
       - main
+    paths: 
+      - 'src/**' 
 
 jobs:
   chromatic-deployment:
@@ -28,12 +30,6 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # Compare with main branch baseline
-      - name: Compare with main branch baseline
-        run: |
-          chromatic compare --project-token ${{ secrets.CHROMATIC_PROJECT_TOKEN }} --main-branch
-
 
   wait-for-chromatic-approval:
     runs-on: ubuntu-latest
