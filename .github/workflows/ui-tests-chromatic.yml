@@ -23,16 +23,25 @@ jobs:
           node-version: '20' # Specify the Node.js version you are using
       - name: Install dependencies
         run: npm install
-      - name: Publish to Chromatic
+      - name: Publish to Chromatic (for approval)
+        if: github.event_name == 'pull_request'
         uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # env:
-        #   GH_PAT: ${{ secrets.GH_PAT }}
+      - name: Publish to Chromatic (main)
+        if: github.ref == 'refs/heads/main'
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          autoAcceptChanges: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
 
   wait-for-chromatic-approval:
     runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
     needs: chromatic-deployment
     steps:
       - name: Wait for Chromatic to approve the PR
