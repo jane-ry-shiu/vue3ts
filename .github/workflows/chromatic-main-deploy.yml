@@ -1,0 +1,28 @@
+# .github/workflows/ui-tests.yml
+# deploy to chromatic
+ 
+name: 'Chromatic Main Deployment'
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  chromatic-deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Required to retrieve git history
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20' # Specify the Node.js version you are using
+      - name: Install dependencies
+        run: npm install
+      - name: Publish to Chromatic (for approval)
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          autoAcceptChanges: true
