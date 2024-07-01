@@ -13,7 +13,6 @@ jobs:
   chromatic-deployment:
     runs-on: ubuntu-latest
     env:
-        CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
         CHROMATIC_SHA: ${{ github.event.pull_request.head.sha }}
         CHROMATIC_BRANCH: ${{ github.event.pull_request.head.ref }}
     steps:
@@ -32,7 +31,7 @@ jobs:
       - name: Publish to Chromatic (for approval)
         uses: chromaui/action@latest
         with:
-          projectToken: ${{ env.CHROMATIC_PROJECT_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
   wait-for-chromatic-approval:
