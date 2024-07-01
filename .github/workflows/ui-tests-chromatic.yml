@@ -31,7 +31,6 @@ jobs:
 
       - name: Publish to Chromatic (for approval)
         uses: chromaui/action@latest
-        
         with:
           projectToken: ${{ env.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
