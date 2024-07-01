@@ -36,7 +36,7 @@ jobs:
           projectToken: ${{ env.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
           branchName: ${{ env.CHROMATIC_BRANCH }}
-          commit: ${{ env.CHROMATIC_SHA }}
+          forceRebuild: true
 
   wait-for-chromatic-approval:
     runs-on: ubuntu-latest
