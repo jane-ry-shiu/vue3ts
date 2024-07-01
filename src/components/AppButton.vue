@@ -80,7 +80,7 @@ defineExpose({
 
 <style less scoped>
 .v-btn {
-  --v-btn-height: 20rem;
+  --v-btn-height: 5rem;
   padding: 2rem;
 }
 </style>
