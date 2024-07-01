@@ -12,6 +12,10 @@ on:
 jobs:
   chromatic-deployment:
     runs-on: ubuntu-latest
+    env:
+        CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+        CHROMATIC_SHA: ${{ github.event.pull_request.head.sha }}
+        CHROMATIC_BRANCH: ${{ github.event.pull_request.head.ref }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -27,10 +31,12 @@ jobs:
 
       - name: Publish to Chromatic (for approval)
         uses: chromaui/action@latest
+        
         with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          projectToken: ${{ env.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          branchName: ${{ github.event.pull_request.head.repo.full_name }}:${{ github.event.pull_request.head.ref }}
+          branchName: ${{ env.CHROMATIC_BRANCH }}
+          commit: ${{ env.CHROMATIC_SHA }}
 
   wait-for-chromatic-approval:
     runs-on: ubuntu-latest
