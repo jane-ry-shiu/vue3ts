@@ -28,8 +28,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Print Chromatic Project Token
-        run: echo "$secrets.CHROMATIC_PROJECT_TOKEN"
+      - name: Build Storybook
+        run: npm run build-storybook
+
+      - name: List build output
+        run: ls -R
 
       - name: Publish to Chromatic (for approval)
         uses: chromaui/action@latest
