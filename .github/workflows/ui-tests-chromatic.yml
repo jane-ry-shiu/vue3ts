@@ -28,6 +28,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Print Chromatic Project Token
+        run: echo "$secrets.CHROMATIC_PROJECT_TOKEN"
+
       - name: Publish to Chromatic (for approval)
         uses: chromaui/action@latest
         with:
